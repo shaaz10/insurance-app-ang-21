@@ -141,6 +141,34 @@
       "description": "Request for Critical Illness Insurance",
       "id": "NpsahKs",
       "updatedAt": "2026-01-25T03:59:23.601Z"
+    },
+    {
+      "requestNumber": "REQ-2026-2884",
+      "customerId": "OISmIOn",
+      "customerName": "Shaik Shaaz Hussain +91",
+      "insuranceType": "health",
+      "status": "agent_assigned",
+      "agentId": "1",
+      "agentName": "John Agent",
+      "requestedCoverage": 55000000,
+      "requestDate": "2026-01-25T12:58:07.198Z",
+      "description": "Request for Critical Illness Insurance",
+      "id": "qMMJsOe",
+      "updatedAt": "2026-01-25T12:58:28.011Z"
+    },
+    {
+      "requestNumber": "REQ-2026-7723",
+      "customerId": "OISmIOn",
+      "customerName": "Shaik Shaaz Hussain +91",
+      "insuranceType": "life",
+      "status": "agent_assigned",
+      "agentId": "2",
+      "agentName": "Emily Wilson",
+      "requestedCoverage": 25200000,
+      "requestDate": "2026-01-25T13:00:03.817Z",
+      "description": "Request for Term Life Insurance",
+      "id": "FnUSbjm",
+      "updatedAt": "2026-01-25T13:00:18.745Z"
     }
   ],
   "policyRecommendations": [
