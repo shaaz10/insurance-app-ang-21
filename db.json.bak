@@ -170,14 +170,14 @@
       "customerId": "OISmIOn",
       "customerName": "Shaik Shaaz Hussain +91",
       "insuranceType": "life",
-      "status": "recommendations_sent",
-      "agentId": "4",
+      "status": "agent_assigned",
+      "agentId": "2",
       "agentName": "Emily Wilson",
       "requestedCoverage": 25200000,
       "requestDate": "2026-01-25T13:00:03.817Z",
       "description": "Request for Term Life Insurance",
       "id": "FnUSbjm",
-      "updatedAt": "2026-01-25T13:06:46.988Z"
+      "updatedAt": "2026-01-25T13:00:18.745Z"
     }
   ],
   "policyRecommendations": [
@@ -226,51 +226,6 @@
       "notes": "Based on your requirements, I have prepared the following policy recommendations.This is a verified test message.",
       "createdAt": "2026-01-25T10:37:25.286Z",
       "id": 1
-    },
-    {
-      "requestId": "FnUSbjm",
-      "agentId": "4",
-      "agentName": "Emily Wilson",
-      "packages": [
-        {
-          "name": "Term Life Basic",
-          "coverage": 2500000,
-          "premium": 500,
-          "features": [
-            "Pure Life Cover",
-            "Tax Benefits",
-            "30 Year Term"
-          ],
-          "recommended": false
-        },
-        {
-          "name": "Term Life Plus",
-          "coverage": 5000000,
-          "premium": 800,
-          "features": [
-            "Life Cover",
-            "Accidental Death Benefit",
-            "Tax Benefits",
-            "30 Year Term"
-          ],
-          "recommended": true
-        },
-        {
-          "name": "Whole Life Plan",
-          "coverage": 10000000,
-          "premium": 1500,
-          "features": [
-            "Lifetime Cover",
-            "Maturity Benefit",
-            "Accidental Death",
-            "Tax Benefits"
-          ],
-          "recommended": false
-        }
-      ],
-      "notes": "Based on your requirements, I have prepared the following policy recommendations.",
-      "createdAt": "2026-01-25T13:06:46.867Z",
-      "id": 2
     }
   ],
   "policyApplications": [

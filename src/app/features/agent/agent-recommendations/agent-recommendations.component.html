@@ -18,7 +18,7 @@
         </div>
     </section>
 
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 -mt-8 pb-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 -mt-8 pb-12 relative z-10">
         <!-- Loading -->
         @if (loading) {
         <div class="flex items-center justify-center py-20">
@@ -66,7 +66,7 @@
                 </h2>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                    @for (package of packages; track package; let i = $index) {
+                    @for (package of packages; track $index; let i = $index) {
                     <div class="relative bg-gradient-to-br rounded-2xl p-6 border-2 transition-all duration-300 hover:shadow-xl"
                         [class.from-amber-50]="package.recommended" [class.to-orange-50]="package.recommended"
                         [class.border-amber-400]="package.recommended" [class.from-gray-50]="!package.recommended"
@@ -83,7 +83,7 @@
 
                         <!-- Package Name -->
                         <div class="mb-4">
-                            <input type="text" [(ngModel)]="package.name"
+                            <input type="text" [(ngModel)]="package.name" [name]="'packageName-' + i"
                                 class="w-full text-xl font-bold bg-transparent border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none pb-2"
                                 [class.border-amber-400]="package.recommended"
                                 [class.text-amber-900]="package.recommended"
@@ -96,7 +96,7 @@
                                 <label class="text-xs font-semibold text-gray-600 uppercase">Coverage Amount</label>
                                 <div class="flex items-center gap-2 mt-1">
                                     <span class="text-gray-700">₹</span>
-                                    <input type="number" [(ngModel)]="package.coverage"
+                                    <input type="number" [(ngModel)]="package.coverage" [name]="'packageCoverage-' + i"
                                         class="flex-1 px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                                 <label class="text-xs font-semibold text-gray-600 uppercase">Monthly Premium</label>
                                 <div class="flex items-center gap-2 mt-1">
                                     <span class="text-gray-700">₹</span>
-                                    <input type="number" [(ngModel)]="package.premium"
+                                    <input type="number" [(ngModel)]="package.premium" [name]="'packagePremium-' + i"
                                         class="flex-1 px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
 
                         <!-- Recommended Toggle -->
                         <div class="flex items-center gap-2 mb-4">
-                            <input type="checkbox" [(ngModel)]="package.recommended"
+                            <input type="checkbox" [(ngModel)]="package.recommended" [name]="'packageRecommended-' + i"
                                 class="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500">
                             <label class="text-sm font-medium text-gray-700">Mark as Recommended</label>
                         </div>
