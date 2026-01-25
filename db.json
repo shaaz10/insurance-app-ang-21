@@ -1,0 +1,299 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@hartford.com",
+      "name": "Admin User",
+      "role": "admin",
+      "phone": "+1-800-HARTFORD",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "email": "agent@hartford.com",
+      "name": "John Agent",
+      "role": "agent",
+      "phone": "+1-555-0101",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "email": "customer@example.com",
+      "name": "Sarah Customer",
+      "role": "customer",
+      "phone": "+1-555-0102",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "email": "shaikshaaz18@gmail.com",
+      "name": "Shaik Shaaz Hussain +91",
+      "role": "customer",
+      "phone": "965241730",
+      "createdAt": "2026-01-24T15:27:45.450Z",
+      "updatedAt": "2026-01-24T15:27:45.450Z",
+      "id": "OISmIOn"
+    },
+    {
+      "email": "shaikshaaz18@gmail.com",
+      "name": "Shaik Shaaz Hussain +91",
+      "role": "customer",
+      "phone": "965241730",
+      "createdAt": "2026-01-24T16:07:21.898Z",
+      "updatedAt": "2026-01-24T16:07:21.898Z",
+      "id": "o6VFI94"
+    },
+    {
+      "email": "bharth@gmail.com",
+      "name": "bharath",
+      "role": "customer",
+      "phone": "08125468831",
+      "createdAt": "2026-01-25T03:52:34.427Z",
+      "updatedAt": "2026-01-25T03:52:34.427Z",
+      "id": "zfb1ij9"
+    }
+  ],
+  "insuranceRequests": [
+    {
+      "id": "1",
+      "requestNumber": "REQ-2024-001",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "customerEmail": "customer@example.com",
+      "customerPhone": "+1-555-0102",
+      "insuranceType": "Health",
+      "status": "agent_assigned",
+      "agentId": "1",
+      "agentName": "John Agent",
+      "description": "Need comprehensive health insurance for family of 4",
+      "requestedCoverage": 500000,
+      "requestDate": "2024-01-20T10:00:00.000Z",
+      "updatedAt": "2026-01-24T16:09:10.973Z"
+    },
+    {
+      "id": "2",
+      "requestNumber": "REQ-2024-002",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "customerEmail": "customer@example.com",
+      "customerPhone": "+1-555-0102",
+      "insuranceType": "Auto",
+      "status": "agent_assigned",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "description": "Car insurance for new Honda Civic 2024",
+      "requestedCoverage": 25000,
+      "requestDate": "2024-01-18T14:30:00.000Z",
+      "updatedAt": "2024-01-19T09:00:00.000Z"
+    },
+    {
+      "requestNumber": "REQ-2026-4461",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "insuranceType": "life",
+      "status": "pending_agent_assignment",
+      "agentId": null,
+      "agentName": null,
+      "requestedCoverage": 25200000,
+      "requestDate": "2026-01-24T16:16:42.909Z",
+      "description": "Request for Term Life Insurance",
+      "id": "dufzYdh"
+    },
+    {
+      "requestNumber": "REQ-2026-1195",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "insuranceType": "auto",
+      "status": "pending_agent_assignment",
+      "agentId": null,
+      "agentName": null,
+      "requestedCoverage": 500000,
+      "requestDate": "2026-01-24T16:16:48.265Z",
+      "description": "Request for Comprehensive Car Insurance",
+      "id": "rFUZy5A"
+    },
+    {
+      "requestNumber": "REQ-2026-2203",
+      "customerId": "zfb1ij9",
+      "customerName": "bharath",
+      "insuranceType": "health",
+      "status": "agent_assigned",
+      "agentId": "1",
+      "agentName": "John Agent",
+      "requestedCoverage": 3100000,
+      "requestDate": "2026-01-25T03:52:43.760Z",
+      "description": "Request for Comprehensive Health Insurance",
+      "id": "F2lOKv6",
+      "updatedAt": "2026-01-25T03:53:16.656Z"
+    },
+    {
+      "requestNumber": "REQ-2026-6039",
+      "customerId": "zfb1ij9",
+      "customerName": "bharath",
+      "insuranceType": "health",
+      "status": "agent_assigned",
+      "agentId": "1",
+      "agentName": "John Agent",
+      "requestedCoverage": 55000000,
+      "requestDate": "2026-01-25T03:59:03.363Z",
+      "description": "Request for Critical Illness Insurance",
+      "id": "NpsahKs",
+      "updatedAt": "2026-01-25T03:59:23.601Z"
+    }
+  ],
+  "policyRecommendations": [],
+  "policyApplications": [
+    {
+      "id": "1",
+      "applicationNumber": "APP-2024-001",
+      "requestId": "2",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "insuranceType": "Auto",
+      "status": "submitted_to_admin",
+      "recommendedPlan": "Comprehensive Auto Coverage",
+      "coverageAmount": 25000,
+      "premium": 120,
+      "documents": [
+        "driving_license.pdf",
+        "vehicle_registration.pdf",
+        "previous_insurance.pdf"
+      ],
+      "agentNotes": "Customer has clean driving record. Recommended comprehensive coverage with zero depreciation.",
+      "submittedDate": "2024-01-22T11:00:00.000Z",
+      "updatedAt": "2024-01-22T11:00:00.000Z"
+    }
+  ],
+  "policies": [
+    {
+      "id": "1",
+      "policyNumber": "POL-2024-001",
+      "applicationId": null,
+      "type": "Auto",
+      "status": "active",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "premium": 1200,
+      "coverageAmount": 50000,
+      "startDate": "2024-01-01",
+      "endDate": "2025-01-01",
+      "approvedBy": "1",
+      "approvedDate": "2023-12-28T00:00:00.000Z",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "claims": [
+    {
+      "id": "1",
+      "claimNumber": "CLM-2024-001",
+      "policyId": "1",
+      "policyNumber": "POL-2024-001",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "status": "agent_reviewed",
+      "type": "Accident",
+      "amount": 3500,
+      "description": "Minor accident - rear bumper damage",
+      "incidentDate": "2024-01-15",
+      "documents": [
+        "accident_photos.pdf",
+        "police_report.pdf",
+        "repair_estimate.pdf"
+      ],
+      "filedDate": "2024-01-16T10:00:00.000Z",
+      "agentReviewDate": "2026-01-24T15:26:44.816Z",
+      "agentNotes": "",
+      "adminReviewDate": null,
+      "adminNotes": null,
+      "approvedAmount": null,
+      "approvedBy": null,
+      "approvedDate": null,
+      "createdAt": "2024-01-16T10:00:00.000Z",
+      "updatedAt": "2026-01-24T15:26:44.816Z"
+    }
+  ],
+  "agents": [
+    {
+      "id": "1",
+      "userId": "2",
+      "name": "John Agent",
+      "email": "agent@hartford.com",
+      "phone": "+1-555-0101",
+      "licenseNumber": "AGT-12345",
+      "specialization": [
+        "Auto",
+        "Health",
+        "Home"
+      ],
+      "customersCount": 15,
+      "policiesSold": 42,
+      "totalCommission": 125000,
+      "rating": 4.8,
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "userId": "4",
+      "name": "Emily Wilson",
+      "email": "emily.wilson@hartford.com",
+      "phone": "+1-555-0201",
+      "licenseNumber": "AGT-12346",
+      "specialization": [
+        "Life",
+        "Health"
+      ],
+      "customersCount": 22,
+      "policiesSold": 58,
+      "totalCommission": 185000,
+      "rating": 4.9,
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "customers": [
+    {
+      "id": "1",
+      "userId": "3",
+      "name": "Sarah Customer",
+      "email": "customer@example.com",
+      "phone": "+1-555-0102",
+      "address": "123 Main St, Hartford, CT 06103",
+      "dateOfBirth": "1985-05-15",
+      "agentId": null,
+      "agentName": null,
+      "policiesCount": 1,
+      "claimsCount": 1,
+      "totalPremium": 1200,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "payments": [
+    {
+      "id": "1",
+      "paymentNumber": "PAY-2024-001",
+      "type": "premium",
+      "policyId": "1",
+      "policyNumber": "POL-2024-001",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "amount": 1200,
+      "status": "completed",
+      "paymentMethod": "credit_card",
+      "paymentDate": "2024-01-01T00:00:00.000Z",
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    }
+  ]
+}

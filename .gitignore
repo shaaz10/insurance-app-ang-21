@@ -1,0 +1,27 @@
+# Angular Default
+/dist
+/tmp
+/out-tsc
+/bazel-out
+/node_modules
+
+# IDEs
+.idea
+.vscode
+.DS_Store
+*.swp
+*.swo
+
+# Misc
+.angular/cache
+.angular/
+.sass-cache/
+connect.lock
+coverage/
+lib/
+testem.log
+typings/
+
+# System Files
+.DS_Store
+Thumbs.db
