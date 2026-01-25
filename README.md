@@ -13,7 +13,7 @@ A premium Angular insurance management application with elegant Asmara Wellness 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js (v20+)
+- Node.js (v20.19.0+ or v22.12.0+)
 - npm
 
 ### Installation
