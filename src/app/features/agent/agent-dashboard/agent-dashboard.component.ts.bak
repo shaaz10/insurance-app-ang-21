@@ -4,15 +4,33 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services';
-import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-agent-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, NavbarComponent],
+  imports: [CommonModule, RouterLink, FormsModule],
   template: `
       <div class="min-h-screen bg-gray-50">
-        <app-navbar [userRole]="'agent'"></app-navbar>
+        <header class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+          <div class="px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-4">
+                <div class="h-10 w-10 rounded-lg bg-gradient-to-br from-primary-600 to-primary-500 flex items-center justify-center">
+                  <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h1 class="text-xl font-bold text-gray-900">Agent Dashboard</h1>
+                  <p class="text-sm text-gray-600">Manage customers and applications</p>
+                </div>
+              </div>
+              <button (click)="logout()" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all">
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </header>
   
         <main class="px-4 sm:px-6 lg:px-8 py-8">
           <!-- Stats -->
@@ -262,5 +280,10 @@ export class AgentDashboardComponent implements OnInit {
         this.loadData();
         alert('Claim forwarded to admin for approval!');
       });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
