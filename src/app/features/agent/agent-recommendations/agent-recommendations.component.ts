@@ -35,6 +35,7 @@ export class AgentRecommendationsComponent implements OnInit {
         features: [''],
         recommended: false
     };
+    customMessage: string = 'Based on your requirements, I have prepared the following policy recommendations.';
 
     constructor(
         private authService: AuthService,
@@ -71,7 +72,9 @@ export class AgentRecommendationsComponent implements OnInit {
 
     initializePackages() {
         // Pre-populate with common packages based on insurance type
-        if (this.request.insuranceType === 'health') {
+        const type = this.request.insuranceType.toLowerCase();
+
+        if (type === 'health') {
             this.packages = [
                 {
                     name: 'Basic Health Plan',
@@ -95,7 +98,7 @@ export class AgentRecommendationsComponent implements OnInit {
                     recommended: false
                 }
             ];
-        } else if (this.request.insuranceType === 'auto') {
+        } else if (type === 'auto') {
             this.packages = [
                 {
                     name: 'Third Party Only',
@@ -119,7 +122,7 @@ export class AgentRecommendationsComponent implements OnInit {
                     recommended: false
                 }
             ];
-        } else if (this.request.insuranceType === 'life') {
+        } else if (type === 'life') {
             this.packages = [
                 {
                     name: 'Term Life Basic',
@@ -188,7 +191,7 @@ export class AgentRecommendationsComponent implements OnInit {
             agentId: this.currentUser.id,
             agentName: this.currentUser.name,
             packages: this.packages,
-            notes: 'Based on your requirements, I have prepared the following policy recommendations.',
+            notes: this.customMessage,
             createdAt: new Date().toISOString()
         };
 

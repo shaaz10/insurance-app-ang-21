@@ -80,13 +80,13 @@
       "customerEmail": "customer@example.com",
       "customerPhone": "+1-555-0102",
       "insuranceType": "Auto",
-      "status": "agent_assigned",
+      "status": "recommendations_sent",
       "agentId": "2",
       "agentName": "John Agent",
       "description": "Car insurance for new Honda Civic 2024",
       "requestedCoverage": 25000,
       "requestDate": "2024-01-18T14:30:00.000Z",
-      "updatedAt": "2024-01-19T09:00:00.000Z"
+      "updatedAt": "2026-01-25T10:37:25.371Z"
     },
     {
       "requestNumber": "REQ-2026-4461",
@@ -143,7 +143,54 @@
       "updatedAt": "2026-01-25T03:59:23.601Z"
     }
   ],
-  "policyRecommendations": [],
+  "policyRecommendations": [
+    {
+      "requestId": "2",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "packages": [
+        {
+          "name": "Third Party Only",
+          "coverage": 0,
+          "premium": 500,
+          "features": [
+            "Third Party Liability",
+            "Legal Cover"
+          ],
+          "recommended": false
+        },
+        {
+          "name": "Comprehensive",
+          "coverage": 500000,
+          "premium": 1200,
+          "features": [
+            "Own Damage",
+            "Third Party",
+            "Zero Depreciation",
+            "Roadside Assistance"
+          ],
+          "recommended": true
+        },
+        {
+          "name": "Premium Comprehensive",
+          "coverage": 1000000,
+          "premium": 1800,
+          "features": [
+            "Own Damage",
+            "Third Party",
+            "Zero Depreciation",
+            "Engine Protection",
+            "NCB Protection",
+            "Roadside Assistance"
+          ],
+          "recommended": false
+        }
+      ],
+      "notes": "Based on your requirements, I have prepared the following policy recommendations.This is a verified test message.",
+      "createdAt": "2026-01-25T10:37:25.286Z",
+      "id": 1
+    }
+  ],
   "policyApplications": [
     {
       "id": "1",
