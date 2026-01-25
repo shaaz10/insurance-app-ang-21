@@ -189,4 +189,8 @@ export class CustomerRequestsComponent implements OnInit {
     browseMorePolicies() {
         this.router.navigate(['/browse-policies']);
     }
+
+    viewRecommendations(request: any) {
+        this.router.navigate(['/customer/recommendations'], { queryParams: { requestId: request.id } });
+    }
 }

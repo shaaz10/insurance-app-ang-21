@@ -177,7 +177,7 @@
       "requestDate": "2026-01-25T13:00:03.817Z",
       "description": "Request for Term Life Insurance",
       "id": "FnUSbjm",
-      "updatedAt": "2026-01-25T13:06:46.988Z"
+      "updatedAt": "2026-01-25T13:17:08.181Z"
     }
   ],
   "policyRecommendations": [
@@ -271,6 +271,60 @@
       "notes": "Based on your requirements, I have prepared the following policy recommendations.",
       "createdAt": "2026-01-25T13:06:46.867Z",
       "id": 2
+    },
+    {
+      "requestId": "FnUSbjm",
+      "agentId": "4",
+      "agentName": "Emily Wilson",
+      "packages": [
+        {
+          "name": "Term Life Basic",
+          "coverage": 2500000,
+          "premium": 500,
+          "features": [
+            "Pure Life Cover",
+            "Tax Benefits",
+            "30 Year Term"
+          ],
+          "recommended": false
+        },
+        {
+          "name": "Term Life Plus",
+          "coverage": -1,
+          "premium": 798,
+          "features": [
+            "Life Coverfdfs",
+            "Accidental Death Benefit",
+            "Tax Benefits",
+            "30 Year Term"
+          ],
+          "recommended": true
+        },
+        {
+          "name": "Whole Life Plan",
+          "coverage": 10000000,
+          "premium": 1500,
+          "features": [
+            "Lifetime Cover",
+            "Maturity Benefit",
+            "Accidental Death",
+            "Tax Benefits"
+          ],
+          "recommended": false
+        },
+        {
+          "name": "",
+          "coverage": -2,
+          "premium": 0,
+          "features": [
+            ""
+          ],
+          "recommended": false
+        }
+      ],
+      "notes": "Based on your requirements, I have prepared the following policy recommendations.fdjatraw",
+      "createdAt": "2026-01-25T13:17:08.161Z",
+      "id": 3
     }
   ],
   "policyApplications": [
