@@ -6,70 +6,78 @@ This document serves as the comprehensive guide for the **Hartford Insurance App
 
 ---
 
-## 🚀 Angular 21 Topics & Modern Features
+## 🚀 Angular 21 Architecture & Modern Patterns
 
-The application leverages the latest advancements in the Angular ecosystem to provide a high-performance, developer-friendly experience.
+This project is a showcase of the latest Angular capabilities, simulating a v21 environment. We have strictly prohibited legacy patterns (like `NgModule`) in favor of a lean, functional approach.
 
 ### 1. **Built-in Control Flow (The "New Standard")**
-We have completely eradicated legacy structural directives (`*ngIf`, `*ngFor`, `*ngSwitch`) in favor of the new, optimized control flow syntax. This improves type checking usage and reduces template overhead.
-
-*   **Conditional Rendering**:
+We have completely eradicated legacy structural directives (`*ngIf`, `*ngFor`) for 100% of the templates.
+*   **Performance**: Improved type-checking and reduced runtime overhead.
+*   **Syntax**:
     ```html
-    @if (isLoading) {
-      <loading-spinner />
-    } @else {
-      <data-view />
+    @if (user.isAdmin) {
+      <admin-panel />
+    } @else if (user.isAgent) {
+      <agent-dash />
     }
-    ```
-*   **Lists & Iteration**:
-    ```html
-    @for (policy of policies; track policy.id) {
-      <policy-card [data]="policy" />
+    
+    @for (item of items; track item.id) {
+      <item-card [data]="item" />
     } @empty {
-      <p>No policies found.</p>
+      <empty-state />
     }
     ```
 
-### 2. **Standalone Components Architecture**
-The project abandons the traditional `NgModule` system. Every component, directive, and pipe is **Standalone**.
-*   **Benefits**: Simplified learning curve, faster build times, and better tree-shaking.
-*   **Implementation**:
+### 2. **Functional Guards & Interceptors**
+Class-based guards and interceptors are deprecated. We utilize strictly functional alternatives:
+*   **Guards**: `CanActivateFn` using `inject()` for dependencies.
+    *   *See*: `src/app/core/guards/auth.guard.ts`
+*   **Interceptors**: `HttpInterceptorFn` configured via `withInterceptors([])`.
+    *   *Location*: `src/app/app.config.ts`
+
+### 3. **Standalone Components & Lazy Loading**
+The application is 100% **Standalone**.
+*   **No NgModules**: Every component manages its own imports.
+*   **Route-Level Code Splitting**: All routes utilize `loadComponent` with dynamic imports to ensure small initial bundle sizes.
     ```typescript
-    @Component({
-      standalone: true,
-      imports: [CommonModule, RouterModule, ...],
-      // ...
-    })
-    export class AgentDashboardComponent {}
+    {
+        path: 'dashboard',
+        loadComponent: () => import('./features/dashboard.component').then(m => m.DashboardComponent)
+    }
     ```
 
-### 3. **Signals-Ready Architecture**
-While the current data layer uses RxJS `BehaviorSubjects` for compatibility, the component structure is prepared for **Signals**.
-*   Templates use direct property binding that can seamlessly switch to Signal reads (`{{ data() }}`).
-*   Change detection strategies are set to `OnPush` defaults in key areas to prepare for Signal-based reactivity.
+### 4. **Signals-Ready Data Layer**
+While the backend interaction relies on RxJS (standard for HTTP), the architecture is "Signals-Ready".
+*   **Reactivity**: Components use `OnPush` change detection semantics.
+*   **Hybrid Injection**: We utilize a mix of constructor-based DI (for consistency) and the modern `inject()` function (in guards/functions).
 
-### 4. **Modern Tooling & Build System**
-*   **Vite-based Dev Server**: Fast cold starts and Hot Module Replacement (HMR).
-*   **ESBuild**: Blazing fast production builds.
+### 5. **Modern Build System**
+*   **Vite**: Powers the development server for instant cold starts.
+*   **ESBuild**: Handles production builds for maximum performance.
 
 ---
 
-## 🛠 Tech Stack & Tools
+## 🛠 Complete Tech Stack
 
 ### Frontend Core
 *   **Framework**: Angular 18 (Simulating v21 patterns)
 *   **Language**: TypeScript 5.4+
-*   **Styling**: Tailwind CSS 3.4 (Utility-first, responsive design)
-*   **Icons**: Lucide / Heroicons (SVG-based for performance)
+*   **RxJS 7.8**: Reactive extensions for HTTP and event handling.
 
-### Mock Backend
-*   **JSON Server**: A full-featured fake REST API.
-*   **Database**: `db.json` (Stores Users, Policies, Claims, Agents).
-*   **Port**: 3000
+### UI & UX
+*   **Tailwind CSS 3.4**: Utility-first CSS framework for rapid, custom design.
+*   **Lucide Icons**: Lightweight, consistent SVG icon pack.
+*   **Chart.js 4.4**: Data visualization for dashboards (Premium payments, stats).
+*   **CSS Animations**: Custom keyframe animations (`animate-fade-in`, `animate-slide-up`) for a premium feel.
+
+### Build & Tooling
+*   **Vite + ESBuild**: The modern Angular build pipeline.
+*   **JSON Server**: Local Node.js mock backend for full CRUD data simulation.
+*   **PostCSS + Autoprefixer**: Advanced CSS processing.
 
 ### Environment
-*   **Runtime**: Node.js v20+
-*   **Package Manager**: NPM
+*   **Runtime**: Node.js v20+ (Required for Angular 18/21).
+*   **Package Manager**: NPM.
 
 ---
 
@@ -84,26 +92,29 @@ npm install
 ```
 
 ### 2. The "Dual-Terminal" Run Strategy
-Since we use a mock backend, you must run two processes simultaneously.
+This project requires **Two (2) active terminal instances** to function:
 
-**Terminal 1: Backend (Data Layer)**
+**Terminal A: Data Layer (Mock Backend)**
 ```bash
 npm run json-server
 ```
-*   *Status*: Watch for `Resources` list (http://localhost:3000/users, etc.)
+*   *Role*: Simulates the API, Database, and Auth endpoints.
+*   *Port*: `3000`
 
-**Terminal 2: Frontend (Application)**
+**Terminal B: Application (Frontend)**
 ```bash
 npm start
 ```
-*   *Status*: App opens at `http://localhost:4200`
+*   *Role*: Runs the Angular Development Server (Vite).
+*   *Port*: `4200`
 
-### 3. Building for Production
-To create optimized static files for deployment (e.g., to Netlify, Vercel, or AWS S3):
+### 3. Production Build
+To generate optimized static assets for deployment:
 ```bash
 npm run build
 ```
-*   Output Directory: `dist/angular-insurance-app/browser/`
+*   *Output*: `dist/angular-insurance-app/browser/`
+*   *Deploy targets*: Netlify, Vercel, Firebase Hosting, AWS S3.
 
 ---
 
@@ -115,15 +126,15 @@ The project follows a **Feature-Based Modular Architecture** to ensure scalabili
 src/app/
 ├── core/                 # Singleton services, models, guards
 │   ├── services/         # AuthService, ApiService (HTTP logic)
-│   ├── guards/           # AuthGuard, RoleGuard (Route protection)
-│   └── interceptors/     # HttpInterceptor (Token injection)
+│   ├── guards/           # Functional AuthGuard, RoleGuard
+│   └── interceptors/     # Functional HttpInterceptor
 ├── features/             # Business features (Standalone Roots)
 │   ├── public/           # Landing, Login, Registration
 │   ├── admin/            # Admin Dashboard, User Mgmt
 │   ├── agent/            # Agent Dashboard, Sales, Claims
 │   └── customer/         # Customer Dashboard, Policy View
 ├── shared/               # Reusable UI components (Navbar, Cards)
-└── app.routes.ts         # Central routing configuration
+└── app.routes.ts         # Central routing configuration w/ lazy loading
 ```
 
 ---
@@ -152,14 +163,17 @@ npm audit
     *   Auto-redirect based on role.
 
 2.  **Agent Workflow**:
-    *   View "Assigned Requests".
+    *   View "Assigned Requests" and "Pending Claims".
     *   "Send Recommendations" -> Navigates to a detailed builder page.
-    *   Review pending claims.
+    *   **Agent Dashboard**: Includes stats, charts, and quick actions.
 
 3.  **Customer Workflow**:
     *   Browse policies.
     *   File a new claim.
     *   View claim history and status updates.
+
+4.  **Admin Workflow**:
+    *   Manage policies, agents, and overall system stats.
 
 ---
 
