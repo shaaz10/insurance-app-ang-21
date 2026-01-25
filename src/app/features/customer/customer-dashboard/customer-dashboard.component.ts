@@ -28,6 +28,7 @@ export class CustomerDashboardComponent implements OnInit, AfterViewInit {
   policies: any[] = [];
   claims: any[] = [];
   requests: any[] = [];
+  pendingRecommendations: any[] = [];
 
   quickActions = [
     { title: 'My Requests', description: 'Track your applications', icon: '📋', route: '/customer/requests', gradient: 'from-indigo-500 to-indigo-600' },
@@ -110,6 +111,7 @@ export class CustomerDashboardComponent implements OnInit, AfterViewInit {
     this.http.get<any[]>(`http://localhost:3000/insuranceRequests?customerId=${customerId}`).subscribe({
       next: (requests) => {
         this.requests = requests;
+        this.pendingRecommendations = requests.filter(r => r.status === 'recommendations_sent');
 
         // Add request activities
         requests.slice(0, 2).forEach(request => {
