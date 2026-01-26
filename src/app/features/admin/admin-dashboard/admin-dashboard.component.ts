@@ -23,7 +23,10 @@ interface InsuranceRequest {
 interface PolicyApplication {
   id: string;
   applicationNumber: string;
+  requestId: string;
+  customerId: string;
   customerName: string;
+  agentId: string;
   agentName: string;
   insuranceType: string;
   status: string;
@@ -45,6 +48,7 @@ interface Claim {
 
 interface Agent {
   id: string;
+  userId: string;
   name: string;
   email: string;
   specialization: string[];
@@ -147,7 +151,7 @@ export class AdminDashboardComponent implements OnInit {
 
     const updatedRequest = {
       ...this.selectedRequest,
-      agentId: agent.id,
+      agentId: agent.userId, // Use the login userId
       agentName: agent.name,
       status: 'agent_assigned',
       updatedAt: new Date().toISOString()
@@ -178,9 +182,9 @@ export class AdminDashboardComponent implements OnInit {
       applicationId: this.selectedApplication.id,
       type: this.selectedApplication.insuranceType,
       status: 'active',
-      customerId: this.selectedApplication.id, // Should get from application
+      customerId: this.selectedApplication.customerId,
       customerName: this.selectedApplication.customerName,
-      agentId: this.selectedApplication.id, // Should get from application
+      agentId: this.selectedApplication.agentId,
       agentName: this.selectedApplication.agentName,
       premium: this.selectedApplication.premium,
       coverageAmount: this.selectedApplication.coverageAmount,
@@ -204,9 +208,26 @@ export class AdminDashboardComponent implements OnInit {
 
       this.http.put(`${this.apiUrl}/policyApplications/${this.selectedApplication!.id}`, updatedApp)
         .subscribe(() => {
+          // Update request status
+          this.http.patch(`${this.apiUrl}/insuranceRequests/${this.selectedApplication!.requestId}`, {
+            status: 'active',
+            updatedAt: new Date().toISOString()
+          }).subscribe();
+
+          // Send notification to customer
+          const notification = {
+            userId: this.selectedApplication!.customerId,
+            title: 'Policy Approved & Active',
+            message: `Congratulations! Your ${this.selectedApplication!.insuranceType} insurance policy (${policyNumber}) has been approved and is now active.`,
+            type: 'success',
+            read: false,
+            createdAt: new Date().toISOString()
+          };
+          this.http.post(`${this.apiUrl}/notifications`, notification).subscribe();
+
           this.showApproveApplicationModal = false;
           this.loadData();
-          alert(`Policy ${policyNumber} created successfully!`);
+          alert(`Policy ${policyNumber} created successfully! Notification sent to customer.`);
         });
     });
   }

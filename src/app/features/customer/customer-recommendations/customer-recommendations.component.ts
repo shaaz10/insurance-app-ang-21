@@ -70,13 +70,12 @@ export class CustomerRecommendationsComponent implements OnInit {
     }
 
     loadRecommendations() {
-        // In json-server, we search by requestId. Note: JSON server might return an array for filtering
         this.http.get<any[]>(`http://localhost:3000/policyRecommendations?requestId=${this.requestId}`)
             .subscribe({
                 next: (recs) => {
                     if (recs && recs.length > 0) {
-                        // Get the filtering result. Assuming the first one is the correct one.
-                        this.recommendation = recs[0];
+                        // Take the latest recommendation if multiple exist
+                        this.recommendation = recs[recs.length - 1];
                     }
                     this.loading = false;
                 },
@@ -89,39 +88,23 @@ export class CustomerRecommendationsComponent implements OnInit {
 
     selectPolicy(pkg: any) {
         if (confirm(`Are you sure you want to proceed with the "${pkg.name}" plan? This will initiate the application process.`)) {
-            this.acceptingPolicy = true;
-
-            // Update request status
-            const updatedRequest = {
-                ...this.request,
-                status: 'application_in_progress',
-                selectedPolicy: pkg,
-                updatedAt: new Date().toISOString()
-            };
-
-            this.http.put(`http://localhost:3000/insuranceRequests/${this.requestId}`, updatedRequest)
-                .subscribe({
-                    next: () => {
-                        // Create a new active policy (mocking this step for now, or we could just leave it as request update)
-                        // Ideally we might want to post to a 'applications' endpoint or similar.
-                        // For now, let's just create a mock policy that is 'pending_approval' or similar if we have a policies endpoint.
-                        // But based on the flow, updating the request status is the key step.
-
-                        // Create a notification or just redirect
-                        alert('Excellent choice! Your application is now in progress.');
-                        this.router.navigate(['/customer/requests']);
-                    },
-                    error: (err) => {
-                        console.error('Error selecting policy', err);
-                        this.acceptingPolicy = false;
-                        alert('Something went wrong. Please try again.');
-                    }
-                });
+            this.router.navigate(['/customer/apply'], {
+                queryParams: {
+                    requestId: this.requestId,
+                    packageName: pkg.name,
+                    premium: pkg.premium,
+                    coverage: pkg.coverage
+                }
+            });
         }
     }
 
     getCoverageAmount(amount: number): string {
-        if (amount === -1) return 'Unlimited'; // Example for specific code
-        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+        if (amount === -1) return 'Unlimited';
+        return new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0
+        }).format(amount);
     }
 }

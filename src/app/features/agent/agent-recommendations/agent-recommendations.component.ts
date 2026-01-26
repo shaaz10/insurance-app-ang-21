@@ -181,6 +181,12 @@ export class AgentRecommendationsComponent implements OnInit {
     }
 
     sendRecommendations() {
+        if (!this.currentUser) {
+            alert('Session expired. Please login again.');
+            this.router.navigate(['/login']);
+            return;
+        }
+
         if (this.packages.length === 0) {
             alert('Please add at least one policy package');
             return;
@@ -205,6 +211,17 @@ export class AgentRecommendationsComponent implements OnInit {
                         updatedAt: new Date().toISOString()
                     }).subscribe({
                         next: () => {
+                            // Create notification for customer
+                            const notification = {
+                                userId: this.request.customerId,
+                                title: 'New Recommendations Ready',
+                                message: `Your agent ${this.currentUser.name} has prepared policy recommendations for your ${this.request.insuranceType} insurance request.`,
+                                type: 'info',
+                                read: false,
+                                createdAt: new Date().toISOString()
+                            };
+                            this.http.post('http://localhost:3000/notifications', notification).subscribe();
+
                             alert('Policy recommendations sent successfully!');
                             this.router.navigate(['/agent']);
                         },

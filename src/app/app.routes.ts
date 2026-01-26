@@ -98,6 +98,10 @@ export const routes: Routes = [
             {
                 path: 'recommendations',
                 loadComponent: () => import('./features/customer/customer-recommendations/customer-recommendations.component').then(m => m.CustomerRecommendationsComponent)
+            },
+            {
+                path: 'apply',
+                loadComponent: () => import('./features/customer/customer-application-form/customer-application-form.component').then(m => m.CustomerApplicationFormComponent)
             }
         ]
     },

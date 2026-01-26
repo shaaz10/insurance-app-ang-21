@@ -292,4 +292,13 @@ export class CustomerDashboardComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  payPremium() {
+    if (confirm(`Confirming payment of ₹${this.stats.nextPayment.toLocaleString()}...`)) {
+      // Mock payment success
+      alert('Payment successful! Thank you for choosing The Hartford.');
+      this.stats.nextPayment = 0;
+      // In a real app, we would update the backend payment records
+    }
+  }
 }

@@ -89,13 +89,13 @@
       "customerEmail": "customer@example.com",
       "customerPhone": "+1-555-0102",
       "insuranceType": "Auto",
-      "status": "application_in_progress",
+      "status": "active",
       "agentId": "2",
       "agentName": "John Agent",
       "description": "Car insurance for new Honda Civic 2024",
       "requestedCoverage": 25000,
       "requestDate": "2024-01-18T14:30:00.000Z",
-      "updatedAt": "2026-01-25T15:49:50.418Z",
+      "updatedAt": "2026-01-26T09:29:05.128Z",
       "selectedPolicy": {
         "name": "Comprehensive",
         "coverage": 500000,
@@ -114,13 +114,14 @@
       "customerId": "3",
       "customerName": "Sarah Customer",
       "insuranceType": "life",
-      "status": "pending_agent_assignment",
-      "agentId": null,
-      "agentName": null,
+      "status": "agent_assigned",
+      "agentId": "1",
+      "agentName": "John Agent",
       "requestedCoverage": 25200000,
       "requestDate": "2026-01-24T16:16:42.909Z",
       "description": "Request for Term Life Insurance",
-      "id": "dufzYdh"
+      "id": "dufzYdh",
+      "updatedAt": "2026-01-26T09:08:12.733Z"
     },
     {
       "requestNumber": "REQ-2026-1195",
@@ -190,6 +191,33 @@
       "description": "Request for Term Life Insurance",
       "id": "FnUSbjm",
       "updatedAt": "2026-01-25T13:17:08.181Z"
+    },
+    {
+      "requestNumber": "REQ-2026-3087",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "insuranceType": "health",
+      "status": "pending_agent_assignment",
+      "agentId": null,
+      "agentName": null,
+      "requestedCoverage": 3100000,
+      "requestDate": "2026-01-26T09:00:00.989Z",
+      "description": "Request for Comprehensive Health Insurance",
+      "id": "4D2Qy7y"
+    },
+    {
+      "requestNumber": "REQ-2026-609",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "insuranceType": "life",
+      "status": "active",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "requestedCoverage": 25200000,
+      "requestDate": "2026-01-26T09:07:50.363Z",
+      "description": "Request for Term Life Insurance",
+      "id": "q0GpOIy",
+      "updatedAt": "2026-01-26T09:29:47.392Z"
     }
   ],
   "policyRecommendations": [
@@ -337,6 +365,51 @@
       "notes": "Based on your requirements, I have prepared the following policy recommendations.fdjatraw",
       "createdAt": "2026-01-25T13:17:08.161Z",
       "id": 3
+    },
+    {
+      "requestId": "q0GpOIy",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "packages": [
+        {
+          "name": "Term Life Basic",
+          "coverage": 2500000,
+          "premium": 500,
+          "features": [
+            "Pure Life Cover",
+            "Tax Benefits",
+            "30 Year Term"
+          ],
+          "recommended": false
+        },
+        {
+          "name": "Term Life Plus",
+          "coverage": 5000000,
+          "premium": 800,
+          "features": [
+            "Life Cover",
+            "Accidental Death Benefit",
+            "Tax Benefits",
+            "30 Year Term"
+          ],
+          "recommended": true
+        },
+        {
+          "name": "Whole Life Plan",
+          "coverage": 10000000,
+          "premium": 1500,
+          "features": [
+            "Lifetime Cover",
+            "Maturity Benefit",
+            "Accidental Death",
+            "Tax Benefits"
+          ],
+          "recommended": false
+        }
+      ],
+      "notes": "Based on your requirements, I have prepared the following policy recommendations.",
+      "createdAt": "2026-01-26T09:11:30.855Z",
+      "id": 4
     }
   ],
   "policyApplications": [
@@ -349,7 +422,7 @@
       "agentId": "2",
       "agentName": "John Agent",
       "insuranceType": "Auto",
-      "status": "submitted_to_admin",
+      "status": "approved",
       "recommendedPlan": "Comprehensive Auto Coverage",
       "coverageAmount": 25000,
       "premium": 120,
@@ -360,7 +433,32 @@
       ],
       "agentNotes": "Customer has clean driving record. Recommended comprehensive coverage with zero depreciation.",
       "submittedDate": "2024-01-22T11:00:00.000Z",
-      "updatedAt": "2024-01-22T11:00:00.000Z"
+      "updatedAt": "2024-01-22T11:00:00.000Z",
+      "adminNotes": "",
+      "approvedDate": "2026-01-26T09:29:05.120Z"
+    },
+    {
+      "applicationNumber": "APP-2026-7574",
+      "requestId": "q0GpOIy",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "insuranceType": "life",
+      "packageName": "Term Life Plus",
+      "premium": 800,
+      "coverageAmount": 5000000,
+      "status": "approved",
+      "documents": [
+        "Screenshot 2026-01-26 at 1.18.08 PM.png"
+      ],
+      "submittedDate": "2026-01-26T09:28:38.472Z",
+      "updatedAt": "2026-01-26T09:29:32.178Z",
+      "id": "Z-R3l1L",
+      "agentNotes": "",
+      "agentVerifiedAt": "2026-01-26T09:29:32.178Z",
+      "adminNotes": "",
+      "approvedDate": "2026-01-26T09:29:47.384Z"
     }
   ],
   "policies": [
@@ -382,6 +480,44 @@
       "approvedDate": "2023-12-28T00:00:00.000Z",
       "createdAt": "2024-01-01T00:00:00.000Z",
       "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "policyNumber": "POL-2026-8459",
+      "applicationId": "1",
+      "type": "Auto",
+      "status": "active",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "premium": 120,
+      "coverageAmount": 25000,
+      "startDate": "2026-01-26",
+      "endDate": "2027-01-26",
+      "approvedBy": "1",
+      "approvedDate": "2026-01-26T09:29:05.082Z",
+      "createdAt": "2026-01-26T09:29:05.082Z",
+      "updatedAt": "2026-01-26T09:29:05.082Z",
+      "id": "YgXBwiw"
+    },
+    {
+      "policyNumber": "POL-2026-7816",
+      "applicationId": "Z-R3l1L",
+      "type": "life",
+      "status": "active",
+      "customerId": "3",
+      "customerName": "Sarah Customer",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "premium": 800,
+      "coverageAmount": 5000000,
+      "startDate": "2026-01-26",
+      "endDate": "2027-01-26",
+      "approvedBy": "1",
+      "approvedDate": "2026-01-26T09:29:47.372Z",
+      "createdAt": "2026-01-26T09:29:47.372Z",
+      "updatedAt": "2026-01-26T09:29:47.372Z",
+      "id": "r5q07Lt"
     }
   ],
   "claims": [
@@ -489,6 +625,26 @@
       "paymentMethod": "credit_card",
       "paymentDate": "2024-01-01T00:00:00.000Z",
       "createdAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "notifications": [
+    {
+      "userId": "3",
+      "title": "Policy Approved & Active",
+      "message": "Congratulations! Your Auto insurance policy (POL-2026-8459) has been approved and is now active.",
+      "type": "success",
+      "read": false,
+      "createdAt": "2026-01-26T09:29:05.129Z",
+      "id": 1
+    },
+    {
+      "userId": "3",
+      "title": "Policy Approved & Active",
+      "message": "Congratulations! Your life insurance policy (POL-2026-7816) has been approved and is now active.",
+      "type": "success",
+      "read": false,
+      "createdAt": "2026-01-26T09:29:47.393Z",
+      "id": 2
     }
   ]
 }

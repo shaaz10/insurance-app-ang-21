@@ -58,8 +58,55 @@ import { NavbarComponent } from '../../../shared/components/navbar/navbar.compon
             </div>
           </div>
   
+          <!-- Pending Policy Applications -->
+          <div class="bg-white rounded-xl border border-gray-200 shadow-sm mb-8 animate-fade-in-up" style="animation-delay: 0.1s;">
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+              <div>
+                <h2 class="text-lg font-bold text-gray-900">Policy Applications to Review</h2>
+                <p class="text-sm text-gray-600">Review documents submitted by customers and escalate to admin</p>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="table-modern">
+                <thead>
+                  <tr>
+                    <th>App #</th>
+                    <th>Customer</th>
+                    <th>Insurance Type</th>
+                    <th>Plan</th>
+                    <th>Premium</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (app of pendingApplications; track app.id) {
+                    <tr>
+                      <td class="font-semibold text-primary-600">{{ app.applicationNumber }}</td>
+                      <td>{{ app.customerName }}</td>
+                      <td><span class="badge badge-info">{{ app.insuranceType }}</span></td>
+                      <td>{{ app.packageName }}</td>
+                      <td class="font-semibold">₹{{ app.premium | number }}</td>
+                      <td><span class="badge badge-warning">{{ app.status }}</span></td>
+                      <td>
+                        <button (click)="reviewApplication(app)" class="btn-primary text-sm py-1 px-3">
+                          Verify & Escalate
+                        </button>
+                      </td>
+                    </tr>
+                  }
+                  @if (pendingApplications.length === 0) {
+                    <tr>
+                      <td colspan="7" class="text-center py-8 text-gray-500">No pending applications</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+  
           <!-- Assigned Requests -->
-          <div class="bg-white rounded-xl border border-gray-200 shadow-sm mb-8 animate-fade-in-up">
+          <div class="bg-white rounded-xl border border-gray-200 shadow-sm mb-8 animate-fade-in-up" style="animation-delay: 0.2s;">
             <div class="px-6 py-4 border-b border-gray-200">
               <h2 class="text-lg font-bold text-gray-900">Assigned Insurance Requests</h2>
               <p class="text-sm text-gray-600">Contact customers and help them choose the right plan</p>
@@ -197,6 +244,61 @@ import { NavbarComponent } from '../../../shared/components/navbar/navbar.compon
             </div>
           </div>
         }
+
+        <!-- Review Application Modal -->
+        @if (showAppReviewModal) {
+          <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fade-in">
+            <div class="bg-white rounded-2xl max-w-2xl w-full animate-scale-in">
+              <div class="px-6 py-4 border-b border-gray-200">
+                <h2 class="text-xl font-bold text-gray-900">Review Policy Application</h2>
+              </div>
+              <div class="p-6">
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                  <div>
+                    <p class="text-sm text-gray-600">Application #</p>
+                    <p class="font-semibold">{{ selectedApplication?.applicationNumber }}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Customer</p>
+                    <p class="font-semibold">{{ selectedApplication?.customerName }}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Plan</p>
+                    <p class="font-semibold">{{ selectedApplication?.packageName }}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Premium</p>
+                    <p class="font-semibold">₹{{ selectedApplication?.premium | number }}</p>
+                  </div>
+                </div>
+
+                <div class="mb-6">
+                    <p class="text-sm font-semibold text-gray-700 mb-2">Attached Documents</p>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-gray-100 rounded text-sm text-gray-600 flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                            kyc_document.pdf
+                        </span>
+                    </div>
+                </div>
+  
+                <div class="mb-6">
+                  <label class="block text-sm font-semibold text-gray-700 mb-2">Verification Notes</label>
+                  <textarea [(ngModel)]="agentNotes" rows="4" class="input-modern" placeholder="Add your verification confirmation and recommendation for admin..."></textarea>
+                </div>
+  
+                <div class="flex gap-3">
+                  <button (click)="escalateApplication()" class="btn-primary flex-1">
+                    Verify & Escalate to Admin
+                  </button>
+                  <button (click)="showAppReviewModal = false" class="btn-outline flex-1">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
       </div>
   `
 })
@@ -209,7 +311,9 @@ export class AgentDashboardComponent implements OnInit {
   totalCommission = 125000;
 
   showReviewModal = false;
+  showAppReviewModal = false;
   selectedClaim: any = null;
+  selectedApplication: any = null;
   agentNotes = '';
 
   constructor(
@@ -230,6 +334,12 @@ export class AgentDashboardComponent implements OnInit {
     this.http.get<any[]>(`${this.apiUrl}/insuranceRequests?agentId=${currentUser.id}`)
       .subscribe(data => {
         this.assignedRequests = data.filter(r => r.status === 'agent_assigned' || r.status === 'recommendations_sent');
+      });
+
+    // Load pending applications for this agent
+    this.http.get<any[]>(`${this.apiUrl}/policyApplications?agentId=${currentUser.id}&status=submitted_to_agent`)
+      .subscribe(data => {
+        this.pendingApplications = data;
       });
 
     // Load pending claims for this agent
@@ -261,6 +371,37 @@ export class AgentDashboardComponent implements OnInit {
         this.showReviewModal = false;
         this.loadData();
         alert('Claim forwarded to admin for approval!');
+      });
+  }
+
+  reviewApplication(app: any) {
+    this.selectedApplication = app;
+    this.agentNotes = '';
+    this.showAppReviewModal = true;
+  }
+
+  escalateApplication() {
+    if (!this.selectedApplication) return;
+
+    const updatedApp = {
+      ...this.selectedApplication,
+      status: 'submitted_to_admin', // Escalated
+      agentNotes: this.agentNotes,
+      agentVerifiedAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+
+    this.http.put(`${this.apiUrl}/policyApplications/${this.selectedApplication.id}`, updatedApp)
+      .subscribe(() => {
+        // Also update request status
+        this.http.patch(`${this.apiUrl}/insuranceRequests/${this.selectedApplication.requestId}`, {
+          status: 'under_admin_review',
+          updatedAt: new Date().toISOString()
+        }).subscribe();
+
+        this.showAppReviewModal = false;
+        this.loadData();
+        alert('Application escalated to admin with your verification!');
       });
   }
 }
