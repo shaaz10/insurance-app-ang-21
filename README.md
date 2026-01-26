@@ -13,7 +13,7 @@ A premium Angular insurance management application with elegant Asmara Wellness 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js (v20.19.0+ or v22.12.0+)
+- Node.js (v20.0.0+)
 - npm
 
 ### Installation
@@ -181,6 +181,6 @@ This is a demo project for educational purposes.
 
 - Design inspiration: Asmara Wellness Spa
 - Insurance branding: Hartford Insurance Group
-- UI Framework: Angular 17
+- UI Framework: Angular 18 (with v21 patterns)
 - Styling: Tailwind CSS
 - Icons: Heroicons (via inline SVG)
