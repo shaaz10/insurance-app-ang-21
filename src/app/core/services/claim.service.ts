@@ -30,11 +30,11 @@ export class ClaimService {
     createClaim(data: CreateClaimData): Observable<Claim> {
         const newClaim: Partial<Claim> = {
             ...data,
-            claimNumber: 'CLM-' + Date.now(),
-            status: ClaimStatus.PENDING,
-            filedDate: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date()
+            claimNumber: 'CLM-' + Math.floor(100000 + Math.random() * 900000),
+            status: data.status || ClaimStatus.PENDING_AGENT_REVIEW,
+            filedDate: new Date().toISOString(),
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
         };
 
         return this.http.post<Claim>(this.API_URL, newClaim);

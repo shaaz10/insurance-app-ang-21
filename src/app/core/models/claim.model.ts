@@ -1,5 +1,7 @@
 export enum ClaimStatus {
     PENDING = 'pending',
+    PENDING_AGENT_REVIEW = 'pending_agent_review',
+    AGENT_REVIEWED = 'agent_reviewed',
     UNDER_REVIEW = 'under_review',
     APPROVED = 'approved',
     REJECTED = 'rejected',
@@ -13,22 +15,32 @@ export interface Claim {
     policyNumber: string;
     customerId: string;
     customerName: string;
-    status: ClaimStatus;
+    agentId?: string;
+    agentName?: string;
+    status: string | ClaimStatus;
+    type: string;
     amount: number;
     description: string;
-    incidentDate: Date;
-    filedDate: Date;
-    reviewedDate?: Date;
-    resolvedDate?: Date;
-    createdAt: Date;
-    updatedAt: Date;
+    incidentDate: string | Date;
+    filedDate: string | Date;
+    reviewedDate?: string | Date;
+    resolvedDate?: string | Date;
+    createdAt: string | Date;
+    updatedAt: string | Date;
 }
 
 export interface CreateClaimData {
     policyId: string;
+    policyNumber: string;
+    customerId: string;
+    customerName: string;
+    agentId?: string;
+    agentName?: string;
+    type: string;
     amount: number;
     description: string;
-    incidentDate: Date;
+    incidentDate: string;
+    status: ClaimStatus;
 }
 
 export interface UpdateClaimData {

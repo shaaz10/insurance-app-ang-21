@@ -62,6 +62,15 @@
       "createdAt": "2026-01-25T03:52:34.427Z",
       "updatedAt": "2026-01-25T03:52:34.427Z",
       "id": "zfb1ij9"
+    },
+    {
+      "email": "sasi@gmail.com",
+      "name": "sasi",
+      "role": "customer",
+      "phone": "08125468831",
+      "createdAt": "2026-01-26T11:40:52.958Z",
+      "updatedAt": "2026-01-26T11:40:52.958Z",
+      "id": "mraol3D"
     }
   ],
   "insuranceRequests": [
@@ -218,6 +227,20 @@
       "description": "Request for Term Life Insurance",
       "id": "q0GpOIy",
       "updatedAt": "2026-01-26T09:29:47.392Z"
+    },
+    {
+      "requestNumber": "REQ-2026-5698",
+      "customerId": "mraol3D",
+      "customerName": "sasi",
+      "insuranceType": "life",
+      "status": "active",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "requestedCoverage": 25200000,
+      "requestDate": "2026-01-26T11:41:01.524Z",
+      "description": "Request for Term Life Insurance",
+      "id": "je7QNsP",
+      "updatedAt": "2026-01-26T11:42:53.527Z"
     }
   ],
   "policyRecommendations": [
@@ -410,6 +433,51 @@
       "notes": "Based on your requirements, I have prepared the following policy recommendations.",
       "createdAt": "2026-01-26T09:11:30.855Z",
       "id": 4
+    },
+    {
+      "requestId": "je7QNsP",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "packages": [
+        {
+          "name": "Term Life Basic",
+          "coverage": 2500000,
+          "premium": 500,
+          "features": [
+            "Pure Life Cover",
+            "Tax Benefits",
+            "30 Year Term"
+          ],
+          "recommended": false
+        },
+        {
+          "name": "Term Life Plus",
+          "coverage": 5000000,
+          "premium": 800,
+          "features": [
+            "Life Cover",
+            "Accidental Death Benefit",
+            "Tax Benefits",
+            "30 Year Term"
+          ],
+          "recommended": true
+        },
+        {
+          "name": "Whole Life Plan",
+          "coverage": 10000000,
+          "premium": 1500,
+          "features": [
+            "Lifetime Cover",
+            "Maturity Benefit",
+            "Accidental Death",
+            "Tax Benefits"
+          ],
+          "recommended": false
+        }
+      ],
+      "notes": "Based on your requirements, I have prepared the following policy recommendations.this",
+      "createdAt": "2026-01-26T11:41:33.802Z",
+      "id": 5
     }
   ],
   "policyApplications": [
@@ -459,6 +527,29 @@
       "agentVerifiedAt": "2026-01-26T09:29:32.178Z",
       "adminNotes": "",
       "approvedDate": "2026-01-26T09:29:47.384Z"
+    },
+    {
+      "applicationNumber": "APP-2026-1211",
+      "requestId": "je7QNsP",
+      "customerId": "mraol3D",
+      "customerName": "sasi",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "insuranceType": "life",
+      "packageName": "Term Life Basic",
+      "premium": 500,
+      "coverageAmount": 2500000,
+      "status": "approved",
+      "documents": [
+        "Screenshot 2026-01-26 at 1.18.08 PM.png"
+      ],
+      "submittedDate": "2026-01-26T11:42:09.833Z",
+      "updatedAt": "2026-01-26T11:42:35.607Z",
+      "id": "vD2skYU",
+      "agentNotes": "this is sasi poliy",
+      "agentVerifiedAt": "2026-01-26T11:42:35.607Z",
+      "adminNotes": "sasi policy is reviewed",
+      "approvedDate": "2026-01-26T11:42:53.510Z"
     }
   ],
   "policies": [
@@ -518,6 +609,25 @@
       "createdAt": "2026-01-26T09:29:47.372Z",
       "updatedAt": "2026-01-26T09:29:47.372Z",
       "id": "r5q07Lt"
+    },
+    {
+      "policyNumber": "POL-2026-4413",
+      "applicationId": "vD2skYU",
+      "type": "life",
+      "status": "active",
+      "customerId": "mraol3D",
+      "customerName": "sasi",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "premium": 500,
+      "coverageAmount": 2500000,
+      "startDate": "2026-01-26",
+      "endDate": "2027-01-26",
+      "approvedBy": "1",
+      "approvedDate": "2026-01-26T11:42:53.494Z",
+      "createdAt": "2026-01-26T11:42:53.494Z",
+      "updatedAt": "2026-01-26T11:42:53.494Z",
+      "id": "AHOSCqK"
     }
   ],
   "claims": [
@@ -645,6 +755,24 @@
       "read": false,
       "createdAt": "2026-01-26T09:29:47.393Z",
       "id": 2
+    },
+    {
+      "userId": "mraol3D",
+      "title": "New Recommendations Ready",
+      "message": "Your agent John Agent has prepared policy recommendations for your life insurance request.",
+      "type": "info",
+      "read": false,
+      "createdAt": "2026-01-26T11:41:33.820Z",
+      "id": 3
+    },
+    {
+      "userId": "mraol3D",
+      "title": "Policy Approved & Active",
+      "message": "Congratulations! Your life insurance policy (POL-2026-4413) has been approved and is now active.",
+      "type": "success",
+      "read": false,
+      "createdAt": "2026-01-26T11:42:53.527Z",
+      "id": 4
     }
   ]
 }

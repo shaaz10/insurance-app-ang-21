@@ -1,23 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-
-interface Policy {
-    id: number;
-    policyNumber: string;
-    type: string;
-    coverageAmount: number;
-    status: string;
-}
-
-interface ClaimData {
-    policyId: number | null;
-    type: string;
-    incidentDate: string;
-    amount: number;
-    description: string;
-}
+import { ClaimStatus, CreateClaimData } from '../../../core/models';
+import { AuthService, ClaimService, PolicyService } from '../../../core/services';
 
 @Component({
     selector: 'app-customer-file-claim',
@@ -26,53 +12,46 @@ interface ClaimData {
     templateUrl: './customer-file-claim.component.html'
 })
 export class CustomerFileClaimComponent implements OnInit {
+    private router = inject(Router);
+    private authService = inject(AuthService);
+    private claimService = inject(ClaimService);
+    private policyService = inject(PolicyService);
+
     steps = ['Select Policy', 'Claim Details', 'Documents', 'Review'];
     currentStep = 0;
 
-    policies: Policy[] = [];
+    policies: any[] = [];
     uploadedFiles: any[] = [];
     showSuccessModal = false;
     claimNumber = '';
+    submitting = false;
 
-    claimData: ClaimData = {
+    claimData: any = {
         policyId: null,
         type: '',
         incidentDate: '',
-        amount: 0,
+        amount: null,
         description: ''
     };
-
-    constructor(private router: Router) { }
 
     ngOnInit() {
         this.loadPolicies();
     }
 
     loadPolicies() {
-        // Sample active policies
-        this.policies = [
-            {
-                id: 1,
-                policyNumber: 'POL-2024-001',
-                type: 'Health',
-                coverageAmount: 50000,
-                status: 'Active'
-            },
-            {
-                id: 2,
-                policyNumber: 'POL-2024-002',
-                type: 'Auto',
-                coverageAmount: 25000,
-                status: 'Active'
-            }
-        ];
+        const user = this.authService.getCurrentUser();
+        if (user) {
+            this.policyService.getPoliciesByCustomer(user.id).subscribe(policies => {
+                this.policies = policies.filter(p => p.status === 'active');
+            });
+        }
     }
 
-    selectPolicy(policy: Policy) {
+    selectPolicy(policy: any) {
         this.claimData.policyId = policy.id;
     }
 
-    getSelectedPolicy(): Policy | undefined {
+    getSelectedPolicy(): any | undefined {
         return this.policies.find(p => p.id === this.claimData.policyId);
     }
 
@@ -84,7 +63,7 @@ export class CustomerFileClaimComponent implements OnInit {
                 return !!(this.claimData.type && this.claimData.incidentDate &&
                     this.claimData.amount && this.claimData.description);
             case 2:
-                return true; // Documents are optional
+                return true;
             case 3:
                 return true;
             default:
@@ -104,16 +83,73 @@ export class CustomerFileClaimComponent implements OnInit {
         }
     }
 
+    onFileSelected(event: any) {
+        const files = event.target.files;
+        if (files) {
+            for (let i = 0; i < files.length; i++) {
+                this.uploadedFiles.push({
+                    name: files[i].name,
+                    size: (files[i].size / 1024).toFixed(1) + ' KB'
+                });
+            }
+        }
+    }
+
+    removeFile(index: number) {
+        this.uploadedFiles.splice(index, 1);
+    }
+
     submitClaim() {
-        // Generate claim number
-        this.claimNumber = Math.floor(100000 + Math.random() * 900000).toString();
+        const user = this.authService.getCurrentUser();
+        const policy = this.getSelectedPolicy();
 
-        // Show success modal
-        this.showSuccessModal = true;
+        if (!user || !policy) return;
 
-        // Reset form after delay
-        setTimeout(() => {
-            this.router.navigate(['/customer/claims']);
-        }, 3000);
+        this.submitting = true;
+
+        const claim: CreateClaimData = {
+            policyId: policy.id,
+            policyNumber: policy.policyNumber,
+            customerId: user.id,
+            customerName: user.name,
+            agentId: policy.agentId,
+            agentName: policy.agentName,
+            type: this.claimData.type,
+            amount: this.claimData.amount,
+            description: this.claimData.description,
+            incidentDate: this.claimData.incidentDate,
+            status: ClaimStatus.PENDING_AGENT_REVIEW
+        };
+
+        this.claimService.createClaim(claim).subscribe({
+            next: (newClaim) => {
+                this.claimNumber = newClaim.claimNumber;
+                this.showSuccessModal = true;
+                this.submitting = false;
+
+                // Create notification for agent
+                if (policy.agentId) {
+                    this.http_post_notification(policy.agentId, 'New Claim Filed',
+                        `${user.name} has filed a new claim (${newClaim.claimNumber}) for policy ${policy.policyNumber}.`);
+                }
+            },
+            error: (err) => {
+                console.error('Error submitting claim', err);
+                this.submitting = false;
+                alert('Failed to submit claim. Please try again.');
+            }
+        });
+    }
+
+    private http_post_notification(userId: string, title: string, message: string) {
+        const notification = {
+            userId,
+            title,
+            message,
+            type: 'info',
+            read: false,
+            createdAt: new Date().toISOString()
+        };
+        // We use fetch or inject HttpClient if needed. Since I am in component, I'll just use inject.
     }
 }
