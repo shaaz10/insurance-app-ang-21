@@ -89,13 +89,25 @@
       "customerEmail": "customer@example.com",
       "customerPhone": "+1-555-0102",
       "insuranceType": "Auto",
-      "status": "recommendations_sent",
+      "status": "application_in_progress",
       "agentId": "2",
       "agentName": "John Agent",
       "description": "Car insurance for new Honda Civic 2024",
       "requestedCoverage": 25000,
       "requestDate": "2024-01-18T14:30:00.000Z",
-      "updatedAt": "2026-01-25T10:37:25.371Z"
+      "updatedAt": "2026-01-25T15:49:50.418Z",
+      "selectedPolicy": {
+        "name": "Comprehensive",
+        "coverage": 500000,
+        "premium": 1200,
+        "features": [
+          "Own Damage",
+          "Third Party",
+          "Zero Depreciation",
+          "Roadside Assistance"
+        ],
+        "recommended": true
+      }
     },
     {
       "requestNumber": "REQ-2026-4461",

@@ -94,6 +94,10 @@ export const routes: Routes = [
             {
                 path: 'requests',
                 loadComponent: () => import('./features/customer/customer-requests/customer-requests.component').then(m => m.CustomerRequestsComponent)
+            },
+            {
+                path: 'recommendations',
+                loadComponent: () => import('./features/customer/customer-recommendations/customer-recommendations.component').then(m => m.CustomerRecommendationsComponent)
             }
         ]
     },
