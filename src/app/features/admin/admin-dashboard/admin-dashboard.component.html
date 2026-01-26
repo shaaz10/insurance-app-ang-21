@@ -183,6 +183,7 @@
                             <th>Customer</th>
                             <th>Agent</th>
                             <th>Amount</th>
+                            <th>Status</th>
                             <th>Agent Notes</th>
                             <th>Actions</th>
                         </tr>
@@ -194,6 +195,11 @@
                             <td>{{ claim.customerName }}</td>
                             <td>{{ claim.agentName }}</td>
                             <td class="font-semibold">₹{{ claim.amount | number }}</td>
+                            <td>
+                                <span class="badge border {{ getStatusBadgeClass(claim.status) }}">
+                                    {{ getStatusLabel(claim.status) }}
+                                </span>
+                            </td>
                             <td class="max-w-xs truncate">{{ claim.agentNotes || 'No notes' }}</td>
                             <td>
                                 <button (click)="openApproveClaimModal(claim)" class="btn-primary text-sm py-1 px-3">
@@ -202,7 +208,7 @@
                             </td>
                         </tr>
                         <tr *ngIf="pendingClaims.length === 0">
-                            <td colspan="7" class="text-center py-8 text-gray-500">No pending claims</td>
+                            <td colspan="8" class="text-center py-8 text-gray-500">No pending claims</td>
                         </tr>
                     </tbody>
                 </table>

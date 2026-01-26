@@ -660,6 +660,24 @@
       "approvedDate": null,
       "createdAt": "2024-01-16T10:00:00.000Z",
       "updatedAt": "2026-01-24T15:26:44.816Z"
+    },
+    {
+      "policyId": "AHOSCqK",
+      "policyNumber": "POL-2026-4413",
+      "customerId": "mraol3D",
+      "customerName": "sasi",
+      "agentId": "2",
+      "agentName": "John Agent",
+      "type": "Accident",
+      "amount": 40000,
+      "description": "this is sasi claim",
+      "incidentDate": "2026-01-26",
+      "status": "pending_agent_review",
+      "claimNumber": "CLM-909419",
+      "filedDate": "2026-01-26T11:50:48.622Z",
+      "createdAt": "2026-01-26T11:50:48.622Z",
+      "updatedAt": "2026-01-26T11:50:48.622Z",
+      "id": "6EkqVUn"
     }
   ],
   "agents": [

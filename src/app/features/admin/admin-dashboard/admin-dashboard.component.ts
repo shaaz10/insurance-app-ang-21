@@ -117,8 +117,8 @@ export class AdminDashboardComponent implements OnInit {
         this.stats.totalApplications = data.length;
       });
 
-    // Load pending claims
-    this.http.get<Claim[]>(`${this.apiUrl}/claims?status=agent_reviewed`)
+    // Load pending claims (both waiting for agent and waiting for admin)
+    this.http.get<Claim[]>(`${this.apiUrl}/claims?status=agent_reviewed&status=pending_agent_review`)
       .subscribe(data => {
         this.pendingClaims = data;
         this.stats.totalClaims = data.length;
@@ -300,5 +300,25 @@ export class AdminDashboardComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  getStatusLabel(status: string): string {
+    switch (status) {
+      case 'pending_agent_review': return 'With Agent';
+      case 'agent_reviewed': return 'Ready for Admin';
+      case 'approved': return 'Approved';
+      case 'rejected': return 'Rejected';
+      default: return status;
+    }
+  }
+
+  getStatusBadgeClass(status: string): string {
+    switch (status) {
+      case 'pending_agent_review': return 'bg-blue-100 text-blue-700 border-blue-200';
+      case 'agent_reviewed': return 'bg-yellow-100 text-yellow-700 border-yellow-200';
+      case 'approved': return 'bg-green-100 text-green-700 border-green-200';
+      case 'rejected': return 'bg-red-100 text-red-700 border-red-200';
+      default: return 'bg-gray-100 text-gray-700 border-gray-200';
+    }
   }
 }
