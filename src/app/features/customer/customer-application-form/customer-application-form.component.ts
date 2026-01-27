@@ -60,7 +60,7 @@ export class CustomerApplicationFormComponent implements OnInit {
 
         this.submitting = true;
 
-        // 1. Load the request to get agent details
+        //1. Load the request to get agent details
         this.http.get<any>(`http://localhost:3000/insuranceRequests/${this.requestId}`)
             .subscribe(request => {
 
@@ -81,15 +81,15 @@ export class CustomerApplicationFormComponent implements OnInit {
                     updatedAt: new Date().toISOString()
                 };
 
-                // 2. Post the application
+                //2. Post the application
                 this.http.post('http://localhost:3000/policyApplications', application)
                     .subscribe(() => {
-                        // 3. Update the request status
+                        //3. Update the request status
                         this.http.patch(`http://localhost:3000/insuranceRequests/${this.requestId}`, {
                             status: 'application_in_progress',
                             updatedAt: new Date().toISOString()
                         }).subscribe(() => {
-                            // 4. Create a notification for the agent if we had a proper notification logic
+                            //4. Create a notification for the agent if we had a proper notification logic
                             // For now just finish
                             this.submitting = false;
                             alert('Application submitted successfully! Your agent will review it shortly.');
