@@ -47,7 +47,7 @@ export class CustomerFileClaimComponent implements OnInit {
         }
     }
 
-    selectPolicy(policy: any) {
+    selectPolicy(policy: any){
         this.claimData.policyId = policy.id;
     }
 
