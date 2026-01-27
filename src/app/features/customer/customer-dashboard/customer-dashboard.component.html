@@ -66,8 +66,8 @@
                         soon. Please complete it to ensure continuous coverage.</p>
                 </div>
             </div>
-            <button (click)="payPremium()"
-                class="px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white rounded-xl font-bold shadow-lg transition-all transform hover:scale-105 whitespace-nowrap">
+            <button (click)="openPaymentModal()"
+                class="px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white rounded-xl font-bold shadow-lg">
                 Pay ₹{{ stats.nextPayment | number }} Now
             </button>
         </div>
@@ -266,4 +266,55 @@
             </div>
         </div>
     </div>
+    @if (showPaymentModal) {
+    <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative animate-scale-in">
+
+            <!-- Close -->
+            <button (click)="closePaymentModal()"
+            class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl">
+                ✕
+            </button>
+
+            <h2 class="text-2xl font-bold text-gray-900 mb-2 text-center">
+                Pay Premium via UPI
+            </h2>
+
+            <p class="text-center text-gray-600 mb-4">
+                Amount to pay
+            </p>
+
+            <p class="text-center text-3xl font-extrabold text-gray-900 mb-6">
+                ₹{{ stats.nextPayment | number }}
+            </p>
+
+            <!-- QR Code -->
+            <div class="flex justify-center mb-6">
+            <img
+                [src]="upiQrCodeUrl"
+                alt="UPI QR Code"
+                class="w-56 h-56 rounded-xl border shadow"
+            />
+            </div>
+
+            <!-- UPI ID -->
+            <div class="bg-gray-100 rounded-xl p-4 text-center mb-4">
+            <p class="text-sm text-gray-600">UPI ID</p>
+            <p class="text-lg font-bold text-gray-900 select-all">
+                {{ upiId }}
+            </p>
+            </div>
+
+            <p class="text-xs text-gray-500 text-center mb-6">
+                Scan QR or pay using UPI ID in any UPI app (GPay, PhonePe, Paytm).
+            </p>
+
+            <button (click)="confirmPayment()"
+            class="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold transition-all">
+                I Have Completed Payment
+            </button>
+        </div>
+    </div>
+    }
+
 </div>
