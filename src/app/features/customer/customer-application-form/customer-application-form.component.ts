@@ -81,7 +81,7 @@ export class CustomerApplicationFormComponent implements OnInit {
                     updatedAt: new Date().toISOString()
                 };
 
-                //2. Post the application
+                //2. Post the applications
                 this.http.post('http://localhost:3000/policyApplications', application)
                     .subscribe(() => {
                         //3. Update the request status

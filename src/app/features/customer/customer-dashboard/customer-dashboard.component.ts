@@ -126,7 +126,7 @@ export class CustomerDashboardComponent implements OnInit, AfterViewInit {
 
         // Sort activities by time (most recent first)
         this.recentActivities.sort((a, b) => {
-          // Simple sort by description for now
+          // Simple sort by description 
           return 0;
         });
 
@@ -146,7 +146,6 @@ export class CustomerDashboardComponent implements OnInit, AfterViewInit {
     const diffMins = Math.floor(diffMs / 60000);
     const diffHours = Math.floor(diffMs / 3600000);
     const diffDays = Math.floor(diffMs / 86400000);
-
     if (diffMins < 60) return `${diffMins} minutes ago`;
     if (diffHours < 24) return `${diffHours} hours ago`;
     if (diffDays < 7) return `${diffDays} days ago`;
