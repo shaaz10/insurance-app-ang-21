@@ -59,7 +59,19 @@
   }
 
   .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-medium;
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-premium;
+  }
+
+  .glass-panel {
+    @apply bg-white/70 dark:bg-gray-900/70 backdrop-blur-lg border border-white/20 dark:border-gray-700/30;
+  }
+
+  .shadow-premium {
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  :global(.dark) .shadow-premium {
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.3), 0 10px 20px -5px rgba(0, 0, 0, 0.2);
   }
 
   .hover-scale {
@@ -183,14 +195,14 @@
 
 /* Component-specific styles - Light theme */
 .card-modern {
-  @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-6 transition-all duration-300;
-  @apply hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-medium;
+  @apply bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl p-6 transition-all duration-300;
+  @apply hover:border-primary-200 dark:hover:border-primary-800 hover:shadow-premium;
 }
 
 .btn-primary {
-  @apply bg-gradient-to-r from-primary-600 to-primary-500 text-white font-medium;
-  @apply px-6 py-3 rounded-lg transition-all duration-300;
-  @apply hover:shadow-primary-lg hover:scale-105 active:scale-95;
+  @apply bg-gradient-to-r from-primary-600 to-indigo-600 text-white font-semibold;
+  @apply px-6 py-3 rounded-xl transition-all duration-300 shadow-md;
+  @apply hover:shadow-primary-lg hover:scale-[1.02] active:scale-[0.98] hover:ring-2 hover:ring-primary-400 hover:ring-offset-2 dark:hover:ring-offset-gray-900;
 }
 
 .btn-secondary {
@@ -206,9 +218,9 @@
 }
 
 .input-modern {
-  @apply w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white;
-  @apply px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
-  @apply transition-all placeholder:text-gray-400 dark:placeholder:text-gray-500;
+  @apply w-full bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100;
+  @apply px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500;
+  @apply transition-all placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:bg-white dark:focus:bg-gray-800;
 }
 
 .badge {
