@@ -4,21 +4,21 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 interface Claim {
-    id: number;
-    claimNumber: string;
-    policyNumber: string;
-    type: string;
-    amount: number;
-    status: string;
-    dateSubmitted: string;
-    lastUpdated: string;
+  id: number;
+  claimNumber: string;
+  policyNumber: string;
+  type: string;
+  amount: number;
+  status: string;
+  dateSubmitted: string;
+  lastUpdated: string;
 }
 
 @Component({
-    selector: 'app-customer-claim-history',
-    standalone: true,
-    imports: [CommonModule, RouterLink, FormsModule],
-    template: `
+  selector: 'app-customer-claim-history',
+  standalone: true,
+  imports: [CommonModule, RouterLink, FormsModule],
+  template: `
     <div class="min-h-screen bg-gray-50">
       <!-- Header -->
       <header class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
@@ -130,60 +130,60 @@ interface Claim {
   `
 })
 export class CustomerClaimHistoryComponent implements OnInit {
-    claims: Claim[] = [];
+  claims: Claim[] = [];
 
-    ngOnInit() {
-        this.loadClaims();
-    }
+  ngOnInit() {
+    this.loadClaims();
+  }
 
-    loadClaims() {
-        this.claims = [
-            {
-                id: 1,
-                claimNumber: 'CLM-2024-001',
-                policyNumber: 'POL-2024-001',
-                type: 'Medical',
-                amount: 1200,
-                status: 'Approved',
-                dateSubmitted: '2024-01-15',
-                lastUpdated: '2024-01-17'
-            },
-            {
-                id: 2,
-                claimNumber: 'CLM-2024-002',
-                policyNumber: 'POL-2024-002',
-                type: 'Accident',
-                amount: 3500,
-                status: 'Pending',
-                dateSubmitted: '2024-01-20',
-                lastUpdated: '2024-01-20'
-            },
-            {
-                id: 3,
-                claimNumber: 'CLM-2024-003',
-                policyNumber: 'POL-2024-001',
-                type: 'Medical',
-                amount: 850,
-                status: 'Under Review',
-                dateSubmitted: '2024-01-22',
-                lastUpdated: '2024-01-23'
-            }
-        ];
-    }
+  loadClaims() {
+    this.claims = [
+      {
+        id: 1,
+        claimNumber: 'CLM-2024-001',
+        policyNumber: 'POL-2024-001',
+        type: 'Medical',
+        amount: 1200,
+        status: 'Approved',
+        dateSubmitted: '2024-01-15',
+        lastUpdated: '2024-01-17'
+      },
+      {
+        id: 2,
+        claimNumber: 'CLM-2024-002',
+        policyNumber: 'POL-2024-002',
+        type: 'Accident',
+        amount: 3500,
+        status: 'Pending',
+        dateSubmitted: '2024-01-20',
+        lastUpdated: '2024-01-20'
+      },
+      {
+        id: 3,
+        claimNumber: 'CLM-2024-003',
+        policyNumber: 'POL-2024-001',
+        type: 'Medical',
+        amount: 850,
+        status: 'Under Review',
+        dateSubmitted: '2024-01-22',
+        lastUpdated: '2024-01-23'
+      }
+    ];
+  }
 
-    getApprovedClaims(): number {
-        return this.claims.filter(c => c.status === 'Approved').length;
-    }
+  getApprovedClaims(): number {
+    return this.claims.filter(c => c.status === 'Approved').length;
+  }
 
-    getPendingClaims(): number {
-        return this.claims.filter(c => c.status === 'Pending' || c.status === 'Under Review').length;
-    }
+  getPendingClaims(): number {
+    return this.claims.filter(c => c.status === 'Pending' || c.status === 'Under Review').length;
+  }
 
-    getTotalClaimed(): number {
-        return this.claims.reduce((sum, c) => sum + c.amount, 0);
-    }
+  getTotalClaimed(): number {
+    return this.claims.reduce((sum, c) => sum + c.amount, 0);
+  }
 
-    viewClaim(claim: Claim) {
-        alert('View claim details: ' + claim.claimNumber);
-    }
+  viewClaim(claim: Claim) {
+    alert('View claim details: ' + claim.claimNumber);
+  }
 }
