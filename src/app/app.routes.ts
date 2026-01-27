@@ -42,6 +42,10 @@ export const routes: Routes = [
             {
                 path: 'claims',
                 loadComponent: () => import('./features/admin/admin-claims/admin-claims.component').then(m => m.AdminClaimsComponent)
+            },
+            {
+                path: 'analytics',
+                loadComponent: () => import('./features/admin/admin-analytics/admin-analytics.component').then(m => m.AdminAnalyticsComponent)
             }
         ]
     },
@@ -68,6 +72,10 @@ export const routes: Routes = [
             {
                 path: 'recommendations',
                 loadComponent: () => import('./features/agent/agent-recommendations/agent-recommendations.component').then(m => m.AgentRecommendationsComponent)
+            },
+            {
+                path: 'analytics',
+                loadComponent: () => import('./features/agent/agent-analytics/agent-analytics.component').then(m => m.AgentAnalyticsComponent)
             }
         ]
     },
