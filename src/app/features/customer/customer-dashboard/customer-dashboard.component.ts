@@ -294,11 +294,10 @@ export class CustomerDashboardComponent implements OnInit, AfterViewInit {
   });
 }
 
-  showPaymentModal = false;
-  upiId = 'insurance-demo@upi';
-  upiQrCodeUrl = '';
-  activePaymentRequestId: string | null = null;
-  /* ================= PAYMENT METHODS ================= */
+showPaymentModal = false;
+upiId = 'insurance-demo@upi';
+upiQrCodeUrl = '';
+activePaymentRequestId: string | null = null;
 
 openPaymentModal(requestId?: string) {
   this.activePaymentRequestId = requestId || null;
@@ -341,20 +340,19 @@ confirmPayment() {
       ).subscribe();
     });
 
-  // Reset dashboard payment
-  this.stats.nextPayment = 0;
+    // Reset dashboard payments
+    this.stats.nextPayment = 0;
 
-  // Add activity log
-  this.recentActivities.unshift({
-    icon: '💳',
-    title: 'Premium Payment Successful',
-    description: 'Your premium payment has been received.',
-    time: 'Just now',
-    color: 'bg-green-100 text-green-600'
-  });
+    // Add activity log
+    this.recentActivities.unshift({
+      icon: '💳',
+      title: 'Premium Payment Successful',
+      description: 'Your premium payment has been received.',
+      time: 'Just now',
+      color: 'bg-green-100 text-green-600'
+    });
 
-  // Keep only latest 5 activities
-  this.recentActivities = this.recentActivities.slice(0, 5);
-}
-
+    // Keep only latest 5 activities
+    this.recentActivities = this.recentActivities.slice(0, 5);
+  }
 }
