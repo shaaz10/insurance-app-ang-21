@@ -70,7 +70,7 @@ export class CustomerClaimHistoryComponent implements OnInit {
     return this.claims.filter(c => c.status === 'Approved').length;
   }
 
-  //Returns the number of claims that are still in progress
+  //Returns the number of claims that are still in progress.
   getPendingClaims(): number {
     return this.claims.filter(c => c.status === 'Pending' || c.status === 'Under Review').length;
   }
