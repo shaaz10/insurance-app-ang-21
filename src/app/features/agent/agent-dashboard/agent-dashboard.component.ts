@@ -202,7 +202,7 @@ import { NavbarComponent } from '../../../shared/components/navbar/navbar.compon
   
         <!-- Review Claim Modal -->
         @if (showReviewModal) {
-          <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fade-in">
+          <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fade-in text-black">
             <div class="bg-white rounded-2xl max-w-2xl w-full animate-scale-in">
               <div class="px-6 py-4 border-b border-gray-200">
                 <h2 class="text-xl font-bold text-gray-900">Review Claim</h2>
@@ -247,7 +247,7 @@ import { NavbarComponent } from '../../../shared/components/navbar/navbar.compon
 
         <!-- Review Application Modal -->
         @if (showAppReviewModal) {
-          <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fade-in">
+          <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fade-in text-black">
             <div class="bg-white rounded-2xl max-w-2xl w-full animate-scale-in">
               <div class="px-6 py-4 border-b border-gray-200">
                 <h2 class="text-xl font-bold text-gray-900">Review Policy Application</h2>
