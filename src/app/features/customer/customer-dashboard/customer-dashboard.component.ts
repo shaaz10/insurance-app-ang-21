@@ -295,32 +295,16 @@ export class CustomerDashboardComponent implements OnInit, AfterViewInit {
 }
 
 showPaymentModal = false;
-upiId = 'insurance-demo@upi';
-upiQrCodeUrl = '';
+upiId = 'NgNinjas-demo@upi';
 activePaymentRequestId: string | null = null;
 
 openPaymentModal(requestId?: string) {
   this.activePaymentRequestId = requestId || null;
-  this.generateUpiQr();
   this.showPaymentModal = true;
 }
 
 closePaymentModal() {
   this.showPaymentModal = false;
-}
-
-generateUpiQr() {
-  const amount = this.stats.nextPayment;
-
-  const upiUrl =
-    `upi://pay?pa=${this.upiId}` +
-    `&pn=InsuranceDemo` +
-    `&am=${amount}` +
-    `&cu=INR`;
-
-  this.upiQrCodeUrl =
-    'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=' +
-    encodeURIComponent(upiUrl);
 }
 
 confirmPayment() {
